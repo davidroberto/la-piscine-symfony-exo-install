@@ -21,4 +21,13 @@ class PageController
     {
         var_dump('contact'); die;
     }
+
+
+    /**
+     * @Route("/test", name="test")
+     */
+    public function test()
+    {
+        var_dump('test'); die;
+    }
 }
