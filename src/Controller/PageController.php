@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PageController
@@ -11,7 +13,9 @@ class PageController
      */
     public function home()
     {
-        var_dump('Accueil'); die;
+        // je retourne une réponse HTTP valide en utilisant
+        // la classe Response du composant HTTPFoundation
+        return new Response('Accueil');
     }
 
     /**
