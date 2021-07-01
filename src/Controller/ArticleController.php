@@ -1,8 +1,8 @@
 <?php
 
-
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController
@@ -13,7 +13,7 @@ class ArticleController
      */
     public function articles()
     {
-        var_dump('articles');
+        return new Response("articles");
     }
 
 }
