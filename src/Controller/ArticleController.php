@@ -10,12 +10,38 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
 
+    private $articles = [
+        1 => [
+            "title" => "La vaccination c'est trop géniale",
+            "content" => "bablablblalba",
+            "id" => 1
+        ],
+        2 => [
+            "title" => "La vaccination c'est pas trop géniale",
+            "content" => "blablablabla",
+            "id" => 2
+        ],
+        3 => [
+            "title" => "Balkany c'est trop génial",
+            "content" => "balblalblalb",
+            "id" => 3
+        ],
+        4 => [
+            "title" => "Balkany c'est pas trop génial",
+            "content" => "balblalblalb",
+            "id" => 4
+        ]
+    ];
+
+
     /**
      * @Route("/articles", name="articleList")
      */
     public function articleList()
     {
-        return new Response("articles");
+        return $this->render('article_list.html.twig', [
+            'articles' => $this->articles
+        ]);
     }
 
     /**
@@ -23,29 +49,6 @@ class ArticleController extends AbstractController
      */
     public function articleShow($id)
     {
-        $articles = [
-            1 => [
-                "title" => "La vaccination c'est trop géniale",
-                "content" => "bablablblalba",
-                "id" => 1
-            ],
-            2 => [
-                "title" => "La vaccination c'est pas trop géniale",
-                "content" => "blablablabla",
-                "id" => 2
-            ],
-            3 => [
-                "title" => "Balkany c'est trop génial",
-                "content" => "balblalblalb",
-                "id" => 3
-            ],
-            4 => [
-                "title" => "Balkany c'est pas trop génial",
-                "content" => "balblalblalb",
-                "id" => 4
-            ]
-        ];
-
         // j'utilise la méthode render de l'AbstractController
         // pour récupérer un fichier Twig, le transformer en HTML
         // et le renvoyer en réponse HTTP au navigateur
@@ -53,7 +56,7 @@ class ArticleController extends AbstractController
         // lui passer un tableau en second parametre, avec toutes les
         // variables que je veux utiliser
         return $this->render('article_show.html.twig', [
-            'article' => $articles[$id]
+            'article' => $this->articles[$id]
         ]);
     }
 
