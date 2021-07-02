@@ -47,22 +47,21 @@ class PageController extends AbstractController
 
     /**
      * @Route("/poker", name="poker")
+     * J'utilise l'autowire de Symfony pour instancier automatiquement
+     * la classe Request dans une variable $request
+     * Ce méchanisme est aussi appelé "Injection de dépendances"
      */
-    public function poker()
+    public function poker(Request $request)
     {
-       $request = Request::createFromGlobals();
-
        $age = $request->query->get('age');
 
        if ($age > 18) {
            return new Response('Poker blablab');
        } else {
-           // je fais une redirection vers la route digimon
-           // grâce à la méthode redirectToRoute qui existe dans
-           // l'AbstractController
-           // Ma classe PageController hérite d'AbstractController
-           // donc elle hérite aussi de la méthode redirectToRoute
-           return $this->redirectToRoute('digimon');
+           // je fais une redirection vers une autre page
+           // en utilisant la méthode redirectToRoute() récupéré
+           // depuis l'héritage d'AbstractController
+           return $this->redirectToRoute("digimon");
        }
     }
 
@@ -71,7 +70,7 @@ class PageController extends AbstractController
      */
     public function digimon()
     {
-        return new Response("Les digimons");
+        return new Response('digimon');
     }
 
 }
