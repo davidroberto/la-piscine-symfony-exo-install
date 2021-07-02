@@ -55,13 +55,16 @@ class PageController extends AbstractController
     {
        $age = $request->query->get('age');
 
-       if ($age > 18) {
-           return new Response('Poker blablab');
-       } else {
+
+       if ($age < 18 || is_null($age)) {
            // je fais une redirection vers une autre page
            // en utilisant la méthode redirectToRoute() récupéré
            // depuis l'héritage d'AbstractController
            return $this->redirectToRoute("digimon");
+       } else if ($age >= 18 && $age < 70) {
+           return new Response('Poker blablab');
+       } else {
+           return new Response('Retourne jouer à la crapette');
        }
     }
 
