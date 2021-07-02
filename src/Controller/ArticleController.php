@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ArticleController
+class ArticleController extends AbstractController
 {
 
     /**
@@ -18,17 +19,42 @@ class ArticleController
     }
 
     /**
-     * j'utilise le système de wildcard de Symfony
-     * pour déclarer une URL avec une "variable" "id"
-     * qui se situe après "/article/"
-     * Pour récupérer la valeur de cette variable (wildcard)
-     * j'ai simplement a passer en parametre de méthode
-     * une variable qui a le même nom que la wildcard
      * @Route("/article/{id}", name="articleShow")
      */
     public function articleShow($id)
     {
-        return new Response($id);
+        $articles = [
+            1 => [
+                "title" => "La vaccination c'est trop géniale",
+                "content" => "bablablblalba",
+                "id" => 1
+            ],
+            2 => [
+                "title" => "La vaccination c'est pas trop géniale",
+                "content" => "blablablabla",
+                "id" => 2
+            ],
+            3 => [
+                "title" => "Balkany c'est trop génial",
+                "content" => "balblalblalb",
+                "id" => 3
+            ],
+            4 => [
+                "title" => "Balkany c'est pas trop génial",
+                "content" => "balblalblalb",
+                "id" => 4
+            ]
+        ];
+
+        // j'utilise la méthode render de l'AbstractController
+        // pour récupérer un fichier Twig, le transformer en HTML
+        // et le renvoyer en réponse HTTP au navigateur
+        // Pour utiliser des variables dans le fichier twig, je dois
+        // lui passer un tableau en second parametre, avec toutes les
+        // variables que je veux utiliser
+        return $this->render('article_show.html.twig', [
+            'article' => $articles[$id]
+        ]);
     }
 
 }
