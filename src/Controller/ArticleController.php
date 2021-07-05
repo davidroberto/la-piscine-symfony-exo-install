@@ -14,22 +14,26 @@ class ArticleController extends AbstractController
         1 => [
             "title" => "La vaccination c'est trop géniale",
             "content" => "bablablblalba",
-            "id" => 1
+            "id" => 1,
+            "published" => true,
         ],
         2 => [
             "title" => "La vaccination c'est pas trop géniale",
             "content" => "blablablabla",
-            "id" => 2
+            "id" => 2,
+            "published" => true
         ],
         3 => [
             "title" => "Balkany c'est trop génial",
             "content" => "balblalblalb",
-            "id" => 3
+            "id" => 3,
+            "published" => false
         ],
         4 => [
             "title" => "Balkany c'est pas trop génial",
             "content" => "balblalblalb",
-            "id" => 4
+            "id" => 4,
+            "published" => true
         ]
     ];
 

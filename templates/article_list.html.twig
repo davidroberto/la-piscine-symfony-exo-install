@@ -1,28 +1,20 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
-</head>
-<body>
-    <main>
+{% include '_header.html.twig' %}
+    <h1>Il y a {{ articles | length }} articles dans la base de données</h1>
+    <div class="articles-container">
         {% for article in articles %}
-            <article>
-                {#
+            {% if article.published %}
+                <article class="article">
+                    {#
                     Je génère un lien vers la route articleShow.
                     Cette route demande une wildcard 'id', donc je la renseigne
                     avec l'id de l'article qui est actuellement en train d'être bouclé.
-                #}
-                <a href={{ path('articleShow', {'id': article.id}) }}>
-                    <h2>{{ article.title }}</h2>
-                </a>
-                <p>{{ article.content }}</p>
-            </article>
+                    #}
+                    <a href={{ path('articleShow', {'id': article.id}) }}>
+                        <h2>{{ article.title | upper }}</h2>
+                    </a>
+                    <p>{{ article.content }}</p>
+                </article>
+            {% endif %}
         {% endfor %}
-    </main>
-</body>
-</html>
+    </div>
+{% include '_footer.html.twig' %}
