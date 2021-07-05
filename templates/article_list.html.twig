@@ -12,7 +12,14 @@
     <main>
         {% for article in articles %}
             <article>
-                <h2>{{ article.title }}</h2>
+                {#
+                    Je génère un lien vers la route articleShow.
+                    Cette route demande une wildcard 'id', donc je la renseigne
+                    avec l'id de l'article qui est actuellement en train d'être bouclé.
+                #}
+                <a href={{ path('articleShow', {'id': article.id}) }}>
+                    <h2>{{ article.title }}</h2>
+                </a>
                 <p>{{ article.content }}</p>
             </article>
         {% endfor %}
