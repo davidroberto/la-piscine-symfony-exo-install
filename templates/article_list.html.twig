@@ -1,5 +1,12 @@
-{% include '_header.html.twig' %}
-    <h1>Il y a {{ articles | length }} articles dans la base de données</h1>
+{% extends 'base.html.twig' %}
+
+{% block metaTitle %}
+    Liste des articles
+{% endblock metaTitle %}
+
+
+{% block main %}
+<h1>Il y a {{ articles | length }} articles dans la base de données</h1>
     <div class="articles-container">
         {% for article in articles %}
             {% if article.published %}
@@ -17,4 +24,4 @@
             {% endif %}
         {% endfor %}
     </div>
-{% include '_footer.html.twig' %}
+{% endblock main %}
