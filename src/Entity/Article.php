@@ -22,4 +22,14 @@ class Article
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
 }
