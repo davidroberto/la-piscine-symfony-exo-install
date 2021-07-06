@@ -10,28 +10,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
 
-    private $articles = [
+    private $categories = [
         1 => [
-            "title" => "La vaccination c'est trop géniale",
-            "content" => "bablablblalba",
+            "title" => "Politique",
+            "content" => "Tous les articles liés à Jean Lassalle",
             "id" => 1,
             "published" => true,
         ],
         2 => [
-            "title" => "La vaccination c'est pas trop géniale",
-            "content" => "blablablabla",
+            "title" => "Economie",
+            "content" => "Les meilleurs tuyaux pour avoir DU FRIC",
             "id" => 2,
             "published" => true
         ],
         3 => [
-            "title" => "Balkany c'est trop génial",
-            "content" => "balblalblalb",
+            "title" => "Securité",
+            "content" => "Attention les étrangers sont très méchants",
             "id" => 3,
             "published" => false
         ],
         4 => [
-            "title" => "Balkany c'est pas trop génial",
-            "content" => "balblalblalb",
+            "title" => "Ecologie",
+            "content" => "Hummer <3",
             "id" => 4,
             "published" => true
         ]
