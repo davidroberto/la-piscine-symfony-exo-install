@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
 
-    private $categories = [
+    private $articles = [
         1 => [
             "title" => "Politique",
             "content" => "Tous les articles liés à Jean Lassalle",
