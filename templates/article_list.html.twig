@@ -9,16 +9,9 @@
 <h1>Il y a {{ articles | length }} articles dans la base de données</h1>
     <div class="articles-container">
         {% for article in articles %}
-            {% if article.published %}
+            {% if article.isPublished %}
                 <article class="article">
-                    {#
-                    Je génère un lien vers la route articleShow.
-                    Cette route demande une wildcard 'id', donc je la renseigne
-                    avec l'id de l'article qui est actuellement en train d'être bouclé.
-                    #}
-                    <a href={{ path('articleShow', {'id': article.id}) }}>
-                        <h2>{{ article.title | upper }}</h2>
-                    </a>
+                    <h2>{{ article.title | upper }}</h2>
                     <p>{{ article.content }}</p>
                 </article>
             {% endif %}

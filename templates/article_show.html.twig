@@ -2,7 +2,9 @@
 
 {% block main %}
     <article>
-        <h1></h1>
+        <h1>{{ article.title }}</h1>
+        <div>{{ article.content }}</div>
+        <p>{{ article.createdAt | date('y-m-d') }}</p>
     </article>
-    <h1>{{ article.title }}</h1>
+
 {% endblock main %}
