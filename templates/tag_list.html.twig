@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <div class="tag-container">
+        {% for tag in tags %}
+            <article class="tag">
+                <p style="background-color: {{ tag.color }}">{{ tag.title }}</p>
+                <a href="{{ path('tagShow', {'id': tag.id }) }}">Voir plus</a>
+            </article>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+

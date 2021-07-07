@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <article>
+        <h1>{{ category.title }}</h1>
+        <p>{{ category.createdAt | date('y-m-d') }}</p>
+    </article>
+
+{% endblock main %}

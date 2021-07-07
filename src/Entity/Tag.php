@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @ORM\Entity(repositoryClass=TagRepository::class)
  */
-class Category
+class Tag
 {
     /**
      * @ORM\Id
@@ -23,9 +23,9 @@ class Category
     private $title;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $createdAt;
+    private $color;
 
     public function getId(): ?int
     {
@@ -44,21 +44,15 @@ class Category
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCreatedAt()
+    public function getColor(): ?string
     {
-        return $this->createdAt;
+        return $this->color;
     }
 
-    /**
-     * @param mixed $createdAt
-     */
-    public function setCreatedAt($createdAt): void
+    public function setColor(?string $color): self
     {
-        $this->createdAt = $createdAt;
+        $this->color = $color;
+
+        return $this;
     }
-
-
 }

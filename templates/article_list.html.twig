@@ -13,6 +13,7 @@
                 <article class="article">
                     <h2>{{ article.title | upper }}</h2>
                     <p>{{ article.content }}</p>
+                    <a href="{{ path('articleShow', {'id': article.id }) }}">Voir plus</a>
                 </article>
             {% endif %}
         {% endfor %}
