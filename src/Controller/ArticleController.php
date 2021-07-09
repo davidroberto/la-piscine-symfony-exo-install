@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
 
-
     /**
      * @Route("/articles", name="articleList")
      */
@@ -45,6 +44,21 @@ class ArticleController extends AbstractController
 
         return $this->render('article_show.html.twig', [
             'article' => $article
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function search(ArticleRepository $articleRepository)
+    {
+        $term = 'fusée';
+
+        $articles = $articleRepository->searchByTerm($term);
+
+        return $this->render('article_search.html.twig', [
+            'articles' => $articles,
+            'term' => $term
         ]);
     }
 

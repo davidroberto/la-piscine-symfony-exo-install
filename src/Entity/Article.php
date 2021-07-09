@@ -43,6 +43,13 @@ class Article
      */
     private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Tag::class, inversedBy="articles")
+     */
+    private $tag;
+
+
+
     public function getIsPublished(): ?bool
     {
         return $this->isPublished;
@@ -125,6 +132,18 @@ class Article
     public function setCategory($category): void
     {
         $this->category = $category;
+    }
+
+    public function getTag(): ?Tag
+    {
+        return $this->tag;
+    }
+
+    public function setTag(?Tag $tag): self
+    {
+        $this->tag = $tag;
+
+        return $this;
     }
 
 

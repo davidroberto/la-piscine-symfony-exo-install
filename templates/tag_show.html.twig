@@ -3,6 +3,12 @@
 {% block main %}
     <article class="tag">
         <p style="background-color: {{ tag.color }}">{{ tag.title }}</p>
+
+        <p>Liste des articles pour ce tag : </p>
+        {% for article in tag.articles  %}
+            <p>{{ article.title }}</p>
+            <a href="{{ path('articleShow', {'id': article.id}) }}">Voir l'article</a>
+        {% endfor %}
     </article>
 {% endblock %}
 
