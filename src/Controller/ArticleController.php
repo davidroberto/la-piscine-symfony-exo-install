@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -10,6 +12,32 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
+
+    /**
+     * @Route("/articles/insert", name="articleInsert")
+     */
+    public function insertArticle(EntityManagerInterface $entityManager)
+    {
+
+        // J'utilise l'entité Article, pour créer un nouvel article en bdd
+        // une instance de l'entité Article = un enregistrement d'article en bdd
+        $article = new Article();
+
+        // j'utilise les setters de l'entité Article pour renseigner les valeurs
+        // des colonnes
+        $article->setTitle('Titre article depuis le controleur');
+        $article->setContent('blablalbla');
+        $article->setIsPublished(true);
+        $article->setCreatedAt(new \DateTime('NOW'));
+
+        // je prends toutes les entités créées (ici une seule) et je les "pré-sauvegarde"
+        $entityManager->persist($article);
+
+        // je récupère toutes les entités pré-sauvegardées et je les insère en BDD
+        $entityManager->flush();
+
+        dump('ok'); die;
+    }
 
     /**
      * @Route("/articles", name="articleList")
