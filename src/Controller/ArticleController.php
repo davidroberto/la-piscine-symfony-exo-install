@@ -64,6 +64,20 @@ class ArticleController extends AbstractController
         dump('ok'); die;
     }
 
+
+    /**
+     * @Route("/articles/update/{id}", name="articleUpdate")
+     */
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
+
+        $article->setTitle("titre update");
+
+        $entityManager->persist($article);
+        $entityManager->flush();
+    }
+
     /**
      * @Route("/articles", name="articleList")
      */
