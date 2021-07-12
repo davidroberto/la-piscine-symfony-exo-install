@@ -61,7 +61,7 @@ class ArticleController extends AbstractController
         // je récupère toutes les entités pré-sauvegardées et je les insère en BDD
         $entityManager->flush();
 
-        dump('ok'); die;
+        return $this->redirectToRoute("articleList");
     }
 
 
@@ -76,6 +76,21 @@ class ArticleController extends AbstractController
 
         $entityManager->persist($article);
         $entityManager->flush();
+
+        return $this->redirectToRoute("articleList");
+    }
+
+    /**
+     * @Route("/articles/delete/{id}", name="articleDelete")
+     */
+    public function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
+
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("articleList");
     }
 
     /**
