@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
 {% block main %}
     <article class="tag">
@@ -7,7 +7,7 @@
         <p>Liste des articles pour ce tag : </p>
         {% for article in tag.articles  %}
             <p>{{ article.title }}</p>
-            <a href="{{ path('articleShow', {'id': article.id}) }}">Voir l'article</a>
+            <a href="{{ path('article_show', {'id': article.id}) }}">Voir l'article</a>
         {% endfor %}
     </article>
 {% endblock %}

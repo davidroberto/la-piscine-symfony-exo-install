@@ -1,0 +1,25 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block metaTitle %}
+    Liste des articles
+{% endblock metaTitle %}
+
+
+{% block main %}
+<h1>Il y a {{ articles | length }} articles dans la base de données</h1>
+    <div class="articles-container">
+        {% for article in articles %}
+            {% if article.isPublished %}
+                <article class="article">
+                    <h2>{{ article.title | upper }}</h2>
+                    <p>{{ article.content }}</p>
+                    <a href="{{ path('admin_article_delete', {'id': article.id }) }}">Supprimer</a>
+                    <a href="{{ path('admin_article_update', {'id': article.id }) }}">Mettre à jour (hardcodé)</a>
+                </article>
+            {% endif %}
+        {% endfor %}
+
+        <a href="{{ path('admin_article_insert') }}">Ajouter un article (hardcodé)</a>
+
+    </div>
+{% endblock main %}

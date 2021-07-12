@@ -1,21 +1,19 @@
-{% extends 'base.html.twig' %}
-
-{% block metaTitle %}
-    Liste des articles
-{% endblock metaTitle %}
+{% extends 'front/base.html.twig' %}
 
 
 {% block main %}
-<h1>Il y a {{ articles | length }} articles dans la base de données</h1>
+    <h1>Il y a {{ articles | length }} articles correspondant à : "{{ term }}"</h1>
     <div class="articles-container">
         {% for article in articles %}
             {% if article.isPublished %}
                 <article class="article">
                     <h2>{{ article.title | upper }}</h2>
                     <p>{{ article.content }}</p>
-                    <a href="{{ path('articleShow', {'id': article.id }) }}">Voir plus</a>
+                    <a href="{{ path('article_show', {'id': article.id }) }}">Voir plus</a>
                 </article>
             {% endif %}
         {% endfor %}
     </div>
-{% endblock main %}
+{% endblock %}
+
+
