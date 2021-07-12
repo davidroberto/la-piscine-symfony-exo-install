@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Tag;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +19,12 @@ class ArticleController extends AbstractController
     /**
      * @Route("/articles/insert", name="articleInsert")
      */
-    public function insertArticle(EntityManagerInterface $entityManager)
+    public function insertArticle(
+        EntityManagerInterface $entityManager,
+        CategoryRepository $categoryRepository,
+        TagRepository $tagRepository
+    )
     {
-
         // J'utilise l'entité Article, pour créer un nouvel article en bdd
         // une instance de l'entité Article = un enregistrement d'article en bdd
         $article = new Article();
@@ -29,6 +35,25 @@ class ArticleController extends AbstractController
         $article->setContent('blablalbla');
         $article->setIsPublished(true);
         $article->setCreatedAt(new \DateTime('NOW'));
+
+        // je récupère la catégorie dont l'id est 1 en bdd
+        // doctrine me créé une instance de l'entité category avec les infos de la catégorie de la bdd
+        $category = $categoryRepository->find(1);
+        // j'associé l'instance de l'entité categorie récupérée, à l'instane de l'entité article que je suis
+        // en train de créer
+        $article->setCategory($category);
+
+        $tag = $tagRepository->findOneBy(['title' => 'info']);
+
+        if (is_null($tag)) {
+            $tag = new Tag();
+            $tag->setTitle("info");
+            $tag->setColor("blue");
+        }
+
+        $entityManager->persist($tag);
+
+        $article->setTag($tag);
 
         // je prends toutes les entités créées (ici une seule) et je les "pré-sauvegarde"
         $entityManager->persist($article);
@@ -51,6 +76,8 @@ class ArticleController extends AbstractController
         // pour ça, j'utilise l'autowire (je place la classe en argument du controleur,
         // suivi de la variable dans laquelle je veux que sf m'instancie la classe
         $articles = $articleRepository->findAll();
+
+        dump($articles); die;
 
         return $this->render('article_list.html.twig', [
             'articles' => $articles
