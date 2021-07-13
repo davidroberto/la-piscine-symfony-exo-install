@@ -20,11 +20,25 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/admin/articles/insert", name="admin_article_insert")
      */
-    public function insertArticle()
+    public function insertArticle(Request $request, EntityManagerInterface $entityManager)
     {
         $article = new Article();
 
+        // on génère le formulaire en utilisant le gabarit + une instance de l'entité Article
         $articleForm = $this->createForm(ArticleType::class, $article);
+
+        // on lie le formulaire aux données de POST (aux données envoyées en POST)
+        $articleForm->handleRequest($request);
+
+        // si le formulaire a été posté et qu'il est valide (que tous les champs
+        // obligatoires sont remplis correctement), alors on enregistre l'article
+        // créé en bdd
+        if ($articleForm->isSubmitted() && $articleForm->isValid()) {
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_article_list');
+        }
 
         return $this->render('admin/admin_insert.html.twig', [
            'articleForm' => $articleForm->createView()
