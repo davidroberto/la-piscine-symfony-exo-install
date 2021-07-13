@@ -2,7 +2,40 @@
 
 {% block main %}
 
-    {{ form(articleForm) }}
+{#    {% form_theme articleForm 'bootstrap_4_layout.html.twig' %}#}
+{#    {{ form(articleForm) }}#}
+
+{#    #}{# équivalent de la balise d'ouverture du form #}
+    {{ form_start(articleForm) }}
+
+{#        #}{# permet d'afficher une row du formulaire (label + input) #}
+{#        {{ form_row(articleForm.title) }}#}
+{#        <div class="form_row">#}
+{#            {{ form_row(articleForm.content) }}#}
+{#            {{ form_row(articleForm.createdAt) }}#}
+{#        </div>#}
+{#        {{ form_row(articleForm.isPublished) }}#}
+{#        {{ form_row(articleForm.submit) }}#}
+
+
+     {#permet de rendre le label du champs title #}
+    {{ form_label(articleForm.title) }}
+     {#permet de rendre l'input du champs title #}
+    {{ form_widget(articleForm.title) }}
+
+    <div class="form-group">
+        {{ form_label(articleForm.content, {'label_attr': {'class': 'form_article_content_input'}}) }}
+        {{ form_widget(articleForm.content, {'attr': {'class': 'form-control', 'placeholder': 'remplissez le contenu'}}) }}
+    </div>
+    {{ form_widget(articleForm.createdAt) }}
+
+    {{ form_label(articleForm.isPublished) }}
+    {{ form_widget(articleForm.isPublished) }}
+
+    {{ form_widget(articleForm.submit) }}
+
+     équivalent de la balise de fermeture du form
+    {{ form_end(articleForm) }}
 
 {% endblock %}
 
