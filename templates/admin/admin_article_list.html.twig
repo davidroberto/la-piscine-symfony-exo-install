@@ -14,12 +14,12 @@
                     <h2>{{ article.title | upper }}</h2>
                     <p>{{ article.content }}</p>
                     <a href="{{ path('admin_article_delete', {'id': article.id }) }}">Supprimer</a>
-                    <a href="{{ path('admin_article_update', {'id': article.id }) }}">Mettre à jour (hardcodé)</a>
+                    <a href="{{ path('admin_article_update', {'id': article.id }) }}">Mettre à jour</a>
                 </article>
             {% endif %}
         {% endfor %}
 
-        <a href="{{ path('admin_article_insert') }}">Ajouter un article (hardcodé)</a>
+        <a href="{{ path('admin_article_insert') }}">Ajouter un article</a>
 
     </div>
 {% endblock main %}
