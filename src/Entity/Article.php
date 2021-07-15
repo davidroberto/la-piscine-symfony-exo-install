@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -20,11 +21,18 @@ class Article
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="REMPLI LE TITR PUT1")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *     min=5,
+     *     max=30,
+     *     minMessage="Vous devez écrire plus de 5 caractères",
+     *     maxMessage="Vous devez écrire moins de 30 caractères"
+     * )
      */
     private $content;
 
