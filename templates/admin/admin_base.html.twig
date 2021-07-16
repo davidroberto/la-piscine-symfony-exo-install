@@ -17,6 +17,15 @@
                 <li class="menu-item"><a href="{{ path('admin_article_list') }}">Articles</a></li>
             </ul>
         </nav>
+
+        <div>
+            {% for message in app.flashes('success') %}
+                <div class="flash-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+
     </header>
         <main>
             {% block main %}

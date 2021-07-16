@@ -34,6 +34,14 @@ class AdminArticleController extends AbstractController
         // obligatoires sont remplis correctement), alors on enregistre l'article
         // créé en bdd
         if ($articleForm->isSubmitted() && $articleForm->isValid()) {
+
+            // permet de stocker en session un message flash, dans le but de l'afficher
+            // sur la page suivante
+            $this->addFlash(
+                'success',
+                'L\'article '. $article->getTitle().' a bien été créé !'
+            );
+
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -84,6 +92,11 @@ class AdminArticleController extends AbstractController
 
         $entityManager->remove($article);
         $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'L\'article '. $article->getTitle().' a bien été supprimé !'
+        );
 
         return $this->redirectToRoute("admin_article_list");
     }
