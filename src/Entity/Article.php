@@ -56,6 +56,11 @@ class Article
      */
     private $tag;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
 
 
     public function getIsPublished(): ?bool
@@ -150,6 +155,18 @@ class Article
     public function setTag(?Tag $tag): self
     {
         $this->tag = $tag;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

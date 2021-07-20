@@ -24,7 +24,11 @@
 
         {{ form_label(articleForm.isPublished) }}
         {{ form_widget(articleForm.isPublished) }}
-        {{ form_errors(articleForm.createdAt) }}
+        {{ form_errors(articleForm.isPublished) }}
+
+        {{ form_label(articleForm.image) }}
+        {{ form_widget(articleForm.image) }}
+        {{ form_errors(articleForm.image) }}
 
         {{ form_widget(articleForm.submit, {'label': 'valider'}) }}
 

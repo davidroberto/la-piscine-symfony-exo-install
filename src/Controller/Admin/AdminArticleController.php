@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminArticleController extends AbstractController
 {
@@ -20,7 +21,7 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/admin/articles/insert", name="admin_article_insert")
      */
-    public function insertArticle(Request $request, EntityManagerInterface $entityManager)
+    public function insertArticle(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
         $article = new Article();
 
@@ -35,6 +36,29 @@ class AdminArticleController extends AbstractController
         // créé en bdd
         if ($articleForm->isSubmitted() && $articleForm->isValid()) {
 
+            // je récupère l'image uploadée par l'utilisateur
+            $imageFile = $articleForm->get('image')->getData();
+
+            if ($imageFile) {
+
+                // je créé un nom unique avec le nom original de l'image
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // je "slugifie" le nom original de l'image
+                $safeFilename = $slugger->slug($originalFilename);
+                // j'ajoute un id unique au nom de l'image
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                // je déplace l'image uploadée dans le dossier public/uploads/article (et je la renomme)
+                // idéalement avec un block de try and catch
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+
+                // j'ajoute l'image dans l'entité article (avec le setter)
+                $article->setImage($newFilename);
+            }
+
             // permet de stocker en session un message flash, dans le but de l'afficher
             // sur la page suivante
             $this->addFlash(
@@ -42,6 +66,7 @@ class AdminArticleController extends AbstractController
                 'L\'article '. $article->getTitle().' a bien été créé !'
             );
 
+            // je persiste l'article en bdd
             $entityManager->persist($article);
             $entityManager->flush();
 
