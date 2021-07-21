@@ -24,7 +24,7 @@ class CategoryController extends AbstractController
         // suivi de la variable dans laquelle je veux que sf m'instancie la classe
         $categories = $categoryRepository->findAll();
 
-        return $this->render('category_list.html.twig', [
+        return $this->render('front/category_list.html.twig', [
             'categories' => $categories
         ]);
     }
@@ -43,8 +43,18 @@ class CategoryController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        return $this->render('category_show.html.twig', [
+        return $this->render('front/category_show.html.twig', [
             'category' => $category
+        ]);
+    }
+
+
+    public function categoriesAll(CategoryRepository $categoryRepository)
+    {
+        $categories = $categoryRepository->findAll();
+
+        return $this->render('front/_categories_all.html.twig', [
+            'categories' => $categories
         ]);
     }
 

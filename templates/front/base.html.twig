@@ -15,9 +15,18 @@
                 <input type="text" name="q" placeholder="recherche...">
                 <input type="submit" value="Rechercher">
             </form>
-            <ul class="menu-items">
-                <li class="menu-item"><a href="{{ path('article_list') }}">Articles</a></li>
-            </ul>
+
+            {#
+                https://symfony.com/doc/3.4/templating/embedding_controllers.html
+                avec la syntaxe de : https://stackoverflow.com/questions/45396501/how-to-embed-controllers-in-a-template-using-symfony-4-directory-structure
+            #}
+            {{ render(controller('App\\Controller\\CategoryController::categoriesAll')) }}
+
+{#            <ul class="menu-items">#}
+{#                {% for category in categories.getAll() %}#}
+{#                    <li class="menu-item"><a href="{{ path('categoryShow', {'id': category.id}) }}">{{ category.title }}</a></li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
         </nav>
     </header>
         <main>

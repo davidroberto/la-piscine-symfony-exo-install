@@ -1,0 +1,5 @@
+<ul class="menu-items">
+    {% for category in categories %}
+        <li class="menu-item"><a href="{{ path('categoryShow', {'id': category.id}) }}">{{ category.title }}</a></li>
+    {% endfor %}
+</ul>

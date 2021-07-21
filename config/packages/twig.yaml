@@ -1,6 +1,12 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
 
+    # https://symfony.com/doc/current/templating/global_variables.html
+    globals:
+        categories: '@App\Globals\Categories'
+
+
 when@test:
     twig:
         strict_variables: true
+
